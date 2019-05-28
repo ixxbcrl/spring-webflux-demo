@@ -4,6 +4,7 @@ plugins {
 }
 
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'scala'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -17,4 +18,30 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
+//	compile 'org.scala-lang:scala-library:2.12.4'
+//	compile 'io.gatling:gatling-app:2.3.0'
+	compile 'io.gatling.highcharts:gatling-charts-highcharts:3.1.2'
+	compileOnly 'org.projectlombok:lombok:1.18.8'
+	annotationProcessor 'org.projectlombok:lombok:1.18.8'
+}
+
+task testLoad(type: JavaExec) {
+	description = 'Test load the Spring Boot web service with Gatling'
+	new File("${buildDir}/reports/gatling").mkdirs()
+	
+	group = 'Load Test'
+	classpath = sourceSets.test.runtimeClasspath
+	jvmArgs = [
+			"-Xmx512m",
+			"-Xmx512m",
+			"-Djava.net.preferIPv4Stack=true",
+			"-Djava.net.preferIPv6Addresses=false"
+	]
+	main = 'io.gatling.app.Gatling'
+	args = [
+			'-s', 'TestSimulation',
+			'-sf', 'test/resources',
+			'-df', 'test/resources',
+			'-rf', "${buildDir}/reports/gatling",  
+	]
 }

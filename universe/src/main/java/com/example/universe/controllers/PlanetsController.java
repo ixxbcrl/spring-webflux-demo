@@ -1,8 +1,8 @@
 package com.example.universe.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.universe.controllers.models.Delay;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
@@ -13,10 +13,13 @@ import java.util.stream.Stream;
 
 @RestController
 public class PlanetsController {
-    @GetMapping("/planets")
-    public Mono<String> getPlanetName(@RequestParam long delay) {
-        return Mono.just(getRandomPlanetName())
-                .delayElement(Duration.ofMillis(delay));
+    @PostMapping("/planets")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<String> getPlanetName(@RequestBody Mono<Delay> delay) {
+        return delay.flatMap(p -> Mono.just(getRandomPlanetName())
+                .delayElement(Duration.ofMillis(Long.parseLong(p.getDelayTime()))));
+//        return Mono.just(getRandomPlanetName())
+//                .delayElement(Duration.ofMillis(50));
     }
 
     public String getRandomPlanetName() {
