@@ -1,6 +1,6 @@
 package com.example.station.services;
 
-import com.example.station.services.models.Delay;
+import com.example.station.models.Delay;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;

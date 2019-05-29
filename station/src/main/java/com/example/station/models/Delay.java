@@ -1,4 +1,4 @@
-package com.example.station.services.models;
+package com.example.station.models;
 
 import lombok.Builder;
 import lombok.Data;
