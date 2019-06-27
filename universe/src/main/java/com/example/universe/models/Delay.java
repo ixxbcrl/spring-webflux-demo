@@ -1,4 +1,4 @@
-package com.example.universe.controllers.models;
+package com.example.universe.models.models;
 
 import lombok.Data;
 
