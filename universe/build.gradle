@@ -18,5 +18,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	compileOnly 'org.projectlombok:lombok:1.18.8'
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
+	compile('de.flapdoodle.embed:de.flapdoodle.embed.mongo')
 	annotationProcessor 'org.projectlombok:lombok:1.18.8'
 }

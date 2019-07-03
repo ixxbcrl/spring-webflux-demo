@@ -1,7 +1,8 @@
 package com.example.universe.controllers;
 
+import com.example.universe.models.Delay;
 import com.example.universe.models.Planet;
-import com.example.universe.models.models.Delay;
+import com.example.universe.models.Planets;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -24,12 +25,18 @@ public class PlanetsController {
 //                .delayElement(Duration.ofMillis(50));
     }
 
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public Flux<Planet> getAllPlanets() {
-        return planetService.retrieveAll()
-                .limitRate(10);
-    }
+//    @GetMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public Flux<Planets> getAllPlanets() {
+//        return
+//    }
+
+//    @GetMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public Flux<Planet> getAllPlanets() {
+//        return planetService.retrieveAll()
+//                .limitRate(10);
+//    }
 
     public String getRandomPlanetName() {
         Random rand = new Random();

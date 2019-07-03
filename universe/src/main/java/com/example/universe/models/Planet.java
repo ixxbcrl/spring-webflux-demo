@@ -18,5 +18,4 @@ public class Planet {
             "Uranus",
             "Neptune")
             .collect(Collectors.toList());
-
 }
