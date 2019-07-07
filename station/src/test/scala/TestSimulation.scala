@@ -34,9 +34,9 @@ class TestSimulation extends Simulation {
   )
 
   setUp(
-    scn1.inject(atOnceUsers(1000))
+    scn1.inject(atOnceUsers(500))
       .protocols(httpProtocol),
-    scn2.inject(atOnceUsers(1000))
+    scn2.inject(atOnceUsers(500))
       .protocols(httpProtocolBlocking)
   )
 

@@ -3,6 +3,7 @@ package com.example.universe.controllers;
 import com.example.universe.models.Delay;
 import com.example.universe.models.Planet;
 import com.example.universe.models.Planets;
+import com.example.universe.service.PlanetsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -16,6 +17,12 @@ import java.util.stream.Stream;
 
 @RestController(value = "/planets")
 public class PlanetsController {
+    private PlanetsService planetsService;
+
+    public PlanetsController(PlanetsService planetsService) {
+        this.planetsService = planetsService;
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<String> getPlanetName(@RequestBody Mono<Delay> delay) {
@@ -25,10 +32,19 @@ public class PlanetsController {
 //                .delayElement(Duration.ofMillis(50));
     }
 
-//    @GetMapping
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Flux<Planets> getAllPlanets() {
+        return planetsService.getAllPlanetNames();
+    }
+
+//    @GetMapping("/test")
 //    @ResponseStatus(HttpStatus.OK)
-//    public Flux<Planets> getAllPlanets() {
-//        return
+//    public Mono<Void> testEndpoint() {
+//        System.out.println("start123");
+//        planetsService.testSubscribe();
+//        return planetsService.getAllPlanetNames()
+//                .then(planetsService.testSubscribe());
 //    }
 
 //    @GetMapping
